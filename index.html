@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>TEST cookie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <h1>This is cookie test!!</h1>
+    <p id="result"></p>
+    <script>
+      var query = location.search;
+      var paramObj = new URLSearchParams(query);
+      var userID = paramObj.get("user_id");
+      document.cookie = "line_user_id="+userID;
+      
+      var target = "";
+      if(document.cookie.split(';').filter(function(item) {
+         target = item;
+         return item.indexOf('user_id=') >= 0;
+      }).length) {
+         var result = document.getElementById("result");
+         var cookie_user_id = document.createTextNode(target);
+         result.appendChild(cookie_user_id);
+      }
+    </script>
+  </body>
+</html>
