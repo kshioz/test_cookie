@@ -10,16 +10,21 @@
       var query = location.search;
       var paramObj = new URLSearchParams(query);
       var userID = paramObj.get("user_id");
-      document.cookie = "line_user_id="+userID;
+      if(userID){
+        document.cookie = "line_user_id="+userID;
+      }
       
       var target = "";
+      var result = document.getElementById("result");
       if(document.cookie.split(';').filter(function(item) {
          target = item;
-         return item.indexOf('user_id=') >= 0;
+         return item.indexOf('line_user_id=') >= 0;
       }).length) {
-         var result = document.getElementById("result");
          var cookie_user_id = document.createTextNode(target);
          result.appendChild(cookie_user_id);
+      } else {
+         var text = document.createTextNode("No user_id in cookie!!");
+         result.appendChild(text);
       }
     </script>
   </body>
